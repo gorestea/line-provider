@@ -2,7 +2,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from app.models import Event
 from app.schemas import EventCreate, EventUpdate, EventResponse
-from app.rabbit import publish_event_update
 from fastapi import HTTPException
 
 
@@ -12,7 +11,8 @@ class EventService:
     """
 
     @staticmethod
-    async def get_events(db: AsyncSession, skip: int = 0, limit: int = 10) -> list[EventResponse]:
+    async def get_events(db: AsyncSession, skip: int = 0,
+                         limit: int = 10) -> list[EventResponse]:
         """
         Получение списка событий с возможностью пагинации.
 
@@ -62,7 +62,8 @@ class EventService:
         return EventResponse.from_orm(new_event)
 
     @staticmethod
-    async def update_event(event_id: int, event_update: EventUpdate, db: AsyncSession) -> EventResponse:
+    async def update_event(event_id: int, event_update: EventUpdate,
+                           db: AsyncSession) -> EventResponse:
         """
         Обновление статуса события.
 

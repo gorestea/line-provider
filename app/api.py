@@ -4,14 +4,16 @@ from app.db import get_db
 from app.schemas import EventCreate, EventUpdate, EventResponse
 from app.services.event_service import EventService
 
+
 router = APIRouter()
+
 
 @router.get("/events", response_model=list[EventResponse])
 async def read_events(
     skip: int = 0,
     limit: int = 10,
     db: AsyncSession = Depends(get_db)
-):
+    ):
     """
     Получить список событий с возможностью пагинации.
 
@@ -40,7 +42,7 @@ async def update_event(
     event_id: int,
     event_update: EventUpdate = Body(...),
     db: AsyncSession = Depends(get_db)
-):
+    ):
     """
     Обновить статус события.
 

@@ -2,10 +2,12 @@ from pydantic import BaseModel, condecimal, field_validator
 from enum import Enum
 from datetime import datetime
 
+
 class EventStatus(str, Enum):
     uncompleted = "незавершённое"
     team1_won = "завершено выигрышем первой команды"
     team2_won = "завершено выигрышем второй команды"
+
 
 class EventCreate(BaseModel):
     name: str
@@ -28,8 +30,10 @@ class EventCreate(BaseModel):
             }
         }
 
+
 class EventUpdate(BaseModel):
     status: EventStatus
+
 
 class EventResponse(BaseModel):
     id: int
